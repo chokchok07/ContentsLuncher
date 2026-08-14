@@ -1,0 +1,6 @@
+﻿[2026-08-12 16:21:25] [KillAllActive] Called. SoloMode: True, ActiveCount: 0
+[KillProcessesByName] Target FilePath: C:\Users\user\Documents\VSCode\실행기\런처프로그램(리펙토링)\TestContent.exe (ProcessName: TestContent)
+ -> Found 0 processes for name TestContent
+[2026-08-12 16:31:55] [KillAllActive] Called. SoloMode: True, ActiveCount: 0
+[KillProcessesByName] Target FilePath: C:\Users\user\Documents\VSCode\실행기\런처프로그램(리펙토링)\TestContent.exe (ProcessName: TestContent)
+ -> Found 0 processes for name TestContent

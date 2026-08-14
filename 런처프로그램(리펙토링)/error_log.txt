@@ -1,0 +1,41 @@
+﻿[2026-08-12 12:08:30] [KillAllActive] Called. SoloMode: True, ActiveCount: 0
+[KillProcessesByName] Target FilePath: D:\PROJECT\KeezleContainer\KeezleContainer.exe (ProcessName: KeezleContainer)
+ -> Found 0 processes for name KeezleContainer
+[KillProcessesByName] Target FilePath: D:\AnyDesk.exe (ProcessName: AnyDesk)
+ -> Found 2 processes for name AnyDesk
+ -> Skip ID: 4712 (Cannot verify file path - Access Denied)
+ -> Skip ID: 9612 (Path mismatch: c:\program files (x86)\anydesk\anydesk.exe != d:\anydesk.exe)
+[KillProcessesByName] Target FilePath: C:\Users\user\Documents\VSCode\실행기\런처프로그램(리펙토링)\TestContent.exe (ProcessName: TestContent)
+ -> Found 0 processes for name TestContent
+[2026-08-12 12:08:41] [KillAllActive] Called. SoloMode: True, ActiveCount: 0
+[KillProcessesByName] Target FilePath: D:\PROJECT\KeezleContainer\KeezleContainer.exe (ProcessName: KeezleContainer)
+ -> Found 0 processes for name KeezleContainer
+[KillProcessesByName] Target FilePath: D:\AnyDesk.exe (ProcessName: AnyDesk)
+ -> Found 2 processes for name AnyDesk
+ -> Skip ID: 4712 (Cannot verify file path - Access Denied)
+ -> Skip ID: 9612 (Path mismatch: c:\program files (x86)\anydesk\anydesk.exe != d:\anydesk.exe)
+[KillProcessesByName] Target FilePath: C:\Users\user\Documents\VSCode\실행기\런처프로그램(리펙토링)\TestContent.exe (ProcessName: TestContent)
+ -> Found 0 processes for name TestContent
+[2026-08-12 12:13:15] [KillAllActive] Called. SoloMode: True, ActiveCount: 0
+[KillProcessesByName] Target FilePath: C:\Users\user\Documents\VSCode\실행기\런처프로그램(리펙토링)\TestContent.exe (ProcessName: TestContent)
+ -> Found 0 processes for name TestContent
+==================================================
+[2026-08-12 12:16:01] [NORMAL INFO] Scheduler Settings Updated & Running
+상황: 사용자 조작으로 스케줄러 정보 변경 및 기동 완료
+자동 시작 타겟 ID: 
+자동 종료 지정 시간: 18:00 (PC 종료 설정: False)
+==================================================
+
+[2026-08-12 12:16:38] [KillAllActive] Called. SoloMode: True, ActiveCount: 0
+[KillProcessesByName] Target FilePath: C:\Users\user\Documents\VSCode\실행기\런처프로그램(리펙토링)\TestContent.exe (ProcessName: TestContent)
+ -> Found 0 processes for name TestContent
+[2026-08-12 12:16:44] [KillAllActive] Called. SoloMode: True, ActiveCount: 1
+[KillProcessesByName] Target FilePath: C:\Users\user\Documents\VSCode\실행기\런처프로그램(리펙토링)\TestContent.exe (ProcessName: TestContent)
+ -> Found 1 processes for name TestContent
+ -> Fail to process ID: 28204, Err: 액세스가 거부되었습니다
+[KillProcessesByName] Target FilePath: C:\Users\user\Documents\VSCode\실행기\런처프로그램(리펙토링)\TestContent.exe (ProcessName: TestContent)
+ -> Found 1 processes for name TestContent
+ -> Skip ID: 28204 (Cannot verify file path - Access Denied)
+[2026-08-12 16:04:44] [KillAllActive] Called. SoloMode: True, ActiveCount: 0
+[KillProcessesByName] Target FilePath: C:\Users\user\Documents\VSCode\실행기\런처프로그램(리펙토링)\TestContent.exe (ProcessName: TestContent)
+ -> Found 0 processes for name TestContent

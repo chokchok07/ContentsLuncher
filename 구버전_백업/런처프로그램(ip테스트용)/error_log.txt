@@ -1,0 +1,219 @@
+﻿[2026-08-06 14:47:36] [KillAllActive] Called. SoloMode: True, ActiveCount: 0
+[KillProcessesByName] Target FilePath: C:\Users\user\Documents\VSCode\네비게이터\project-navigator\dist\win-unpacked\Project Navigator.exe (ProcessName: Project Navigator)
+ -> Found 0 processes for name Project Navigator
+[KillProcessesByName] Target FilePath: C:\Windows\System32\calc.exe (ProcessName: calc)
+ -> Found 0 processes for name calc
+[KillProcessesByName] Target FilePath: D:\AnyDesk.exe (ProcessName: AnyDesk)
+ -> Found 2 processes for name AnyDesk
+ -> Skip ID: 19476 (Path mismatch: c:\program files (x86)\anydesk\anydesk.exe != d:\anydesk.exe)
+ -> Skip ID: 4376 (Cannot verify file path - Access Denied)
+[2026-08-06 14:48:01] [KillAllActive] Called. SoloMode: True, ActiveCount: 0
+[KillProcessesByName] Target FilePath: C:\Users\user\Documents\VSCode\네비게이터\project-navigator\dist\win-unpacked\Project Navigator.exe (ProcessName: Project Navigator)
+ -> Found 0 processes for name Project Navigator
+[KillProcessesByName] Target FilePath: C:\Windows\System32\calc.exe (ProcessName: calc)
+ -> Found 0 processes for name calc
+[KillProcessesByName] Target FilePath: D:\AnyDesk.exe (ProcessName: AnyDesk)
+ -> Found 2 processes for name AnyDesk
+ -> Skip ID: 19476 (Path mismatch: c:\program files (x86)\anydesk\anydesk.exe != d:\anydesk.exe)
+ -> Skip ID: 4376 (Cannot verify file path - Access Denied)
+[KillProcessesByName] Target FilePath: D:\AnyDesk.exe (ProcessName: AnyDesk)
+ -> Found 2 processes for name AnyDesk
+ -> Skip ID: 19476 (Path mismatch: c:\program files (x86)\anydesk\anydesk.exe != d:\anydesk.exe)
+ -> Skip ID: 4376 (Cannot verify file path - Access Denied)
+[2026-08-06 14:48:09] [KillAllActive] Called. SoloMode: True, ActiveCount: 0
+[KillProcessesByName] Target FilePath: C:\Users\user\Documents\VSCode\네비게이터\project-navigator\dist\win-unpacked\Project Navigator.exe (ProcessName: Project Navigator)
+ -> Found 0 processes for name Project Navigator
+[KillProcessesByName] Target FilePath: C:\Windows\System32\calc.exe (ProcessName: calc)
+ -> Found 0 processes for name calc
+[KillProcessesByName] Target FilePath: D:\AnyDesk.exe (ProcessName: AnyDesk)
+ -> Found 1 processes for name AnyDesk
+ -> Skip ID: 4376 (Cannot verify file path - Access Denied)
+[2026-08-06 15:58:15] [KillAllActive] Called. SoloMode: True, ActiveCount: 0
+[KillProcessesByName] Target FilePath: C:\Users\user\Documents\VSCode\네비게이터\project-navigator\dist\win-unpacked\Project Navigator.exe (ProcessName: Project Navigator)
+ -> Found 0 processes for name Project Navigator
+[KillProcessesByName] Target FilePath: D:\AnyDesk.exe (ProcessName: AnyDesk)
+ -> Found 1 processes for name AnyDesk
+ -> Skip ID: 4376 (Cannot verify file path - Access Denied)
+[2026-08-06 15:58:32] [KillAllActive] Called. SoloMode: True, ActiveCount: 0
+[KillProcessesByName] Target FilePath: D:\PROJECT\KeezleContainer\KeezleContainer.exe (ProcessName: KeezleContainer)
+ -> Found 0 processes for name KeezleContainer
+[KillProcessesByName] Target FilePath: D:\AnyDesk.exe (ProcessName: AnyDesk)
+ -> Found 1 processes for name AnyDesk
+ -> Skip ID: 4376 (Cannot verify file path - Access Denied)
+[2026-08-06 16:04:16] [KillAllActive] Called. SoloMode: True, ActiveCount: 0
+[KillProcessesByName] Target FilePath: D:\PROJECT\KeezleContainer\KeezleContainer.exe (ProcessName: KeezleContainer)
+ -> Found 0 processes for name KeezleContainer
+[KillProcessesByName] Target FilePath: D:\AnyDesk.exe (ProcessName: AnyDesk)
+ -> Found 1 processes for name AnyDesk
+ -> Skip ID: 4376 (Cannot verify file path - Access Denied)
+[2026-08-06 16:04:21] [KillAllActive] Called. SoloMode: True, ActiveCount: 1
+[KillProcessesByName] Target FilePath: D:\AnyDesk.exe (ProcessName: AnyDesk)
+ -> Found 3 processes for name AnyDesk
+ -> Fail to process ID: 23800, Err: 액세스가 거부되었습니다
+ -> Skip ID: 4376 (Cannot verify file path - Access Denied)
+ -> Killed AnyDesk ID: 16312 (Path matched or default exception)
+[KillProcessesByName] Target FilePath: D:\PROJECT\KeezleContainer\KeezleContainer.exe (ProcessName: KeezleContainer)
+ -> Found 0 processes for name KeezleContainer
+[KillProcessesByName] Target FilePath: D:\AnyDesk.exe (ProcessName: AnyDesk)
+ -> Found 2 processes for name AnyDesk
+ -> Skip ID: 4376 (Cannot verify file path - Access Denied)
+ -> Skip ID: 16312 (Cannot verify file path - Access Denied)
+==================================================
+[2026-08-06 16:28:16] [NORMAL INFO] Scheduler Settings Updated & Running
+상황: 사용자 조작으로 스케줄러 정보 변경 및 기동 완료
+자동 시작 타겟 ID: 
+자동 종료 지정 시간: 18:00 (PC 종료 설정: False)
+==================================================
+
+[2026-08-06 16:36:07] [KillAllActive] Called. SoloMode: True, ActiveCount: 0
+[KillProcessesByName] Target FilePath: D:\PROJECT\KeezleContainer\KeezleContainer.exe (ProcessName: KeezleContainer)
+ -> Found 0 processes for name KeezleContainer
+[KillProcessesByName] Target FilePath: D:\AnyDesk.exe (ProcessName: AnyDesk)
+ -> Found 1 processes for name AnyDesk
+ -> Skip ID: 4376 (Cannot verify file path - Access Denied)
+[2026-08-06 17:07:08] [KillAllActive] Called. SoloMode: True, ActiveCount: 0
+[KillProcessesByName] Target FilePath: D:\PROJECT\KeezleContainer\KeezleContainer.exe (ProcessName: KeezleContainer)
+ -> Found 0 processes for name KeezleContainer
+[KillProcessesByName] Target FilePath: D:\AnyDesk.exe (ProcessName: AnyDesk)
+ -> Found 1 processes for name AnyDesk
+ -> Skip ID: 4376 (Cannot verify file path - Access Denied)
+[KillProcessesByName] Target FilePath: D:\AnyDesk.exe (ProcessName: AnyDesk)
+ -> Found 2 processes for name AnyDesk
+ -> Skip ID: 4376 (Cannot verify file path - Access Denied)
+ -> Killed AnyDesk ID: 11408 (Path matched or default exception)
+[2026-08-06 17:07:40] [KillAllActive] Called. SoloMode: True, ActiveCount: 0
+[KillProcessesByName] Target FilePath: D:\PROJECT\KeezleContainer\KeezleContainer.exe (ProcessName: KeezleContainer)
+ -> Found 0 processes for name KeezleContainer
+[KillProcessesByName] Target FilePath: D:\AnyDesk.exe (ProcessName: AnyDesk)
+ -> Found 1 processes for name AnyDesk
+ -> Skip ID: 4376 (Cannot verify file path - Access Denied)
+[KillProcessesByName] Target FilePath: D:\AnyDesk.exe (ProcessName: AnyDesk)
+ -> Found 2 processes for name AnyDesk
+ -> Skip ID: 27708 (Cannot verify file path - Access Denied)
+ -> Skip ID: 4376 (Cannot verify file path - Access Denied)
+[2026-08-06 17:07:52] [KillAllActive] Called. SoloMode: True, ActiveCount: 0
+[KillProcessesByName] Target FilePath: D:\PROJECT\KeezleContainer\KeezleContainer.exe (ProcessName: KeezleContainer)
+ -> Found 0 processes for name KeezleContainer
+[KillProcessesByName] Target FilePath: D:\AnyDesk.exe (ProcessName: AnyDesk)
+ -> Found 1 processes for name AnyDesk
+ -> Skip ID: 4376 (Cannot verify file path - Access Denied)
+[KillProcessesByName] Target FilePath: D:\AnyDesk.exe (ProcessName: AnyDesk)
+ -> Found 2 processes for name AnyDesk
+ -> Killed AnyDesk ID: 19904 (Path matched or default exception)
+ -> Skip ID: 4376 (Cannot verify file path - Access Denied)
+[2026-08-06 17:08:05] [KillAllActive] Called. SoloMode: True, ActiveCount: 0
+[KillProcessesByName] Target FilePath: D:\PROJECT\KeezleContainer\KeezleContainer.exe (ProcessName: KeezleContainer)
+ -> Found 0 processes for name KeezleContainer
+[KillProcessesByName] Target FilePath: D:\AnyDesk.exe (ProcessName: AnyDesk)
+ -> Found 1 processes for name AnyDesk
+ -> Skip ID: 4376 (Cannot verify file path - Access Denied)
+[2026-08-06 17:09:58] [KillAllActive] Called. SoloMode: True, ActiveCount: 0
+[KillProcessesByName] Target FilePath: D:\PROJECT\KeezleContainer\KeezleContainer.exe (ProcessName: KeezleContainer)
+ -> Found 0 processes for name KeezleContainer
+[KillProcessesByName] Target FilePath: D:\AnyDesk.exe (ProcessName: AnyDesk)
+ -> Found 2 processes for name AnyDesk
+ -> Killed AnyDesk ID: 19648 (Path matched or default exception)
+ -> Skip ID: 4376 (Cannot verify file path - Access Denied)
+[KillProcessesByName] Target FilePath: D:\AnyDesk.exe (ProcessName: AnyDesk)
+ -> Found 3 processes for name AnyDesk
+ -> Fail to process ID: 5892, Err: 액세스가 거부되었습니다
+ -> Skip ID: 4376 (Cannot verify file path - Access Denied)
+ -> Killed AnyDesk ID: 19204 (Path matched or default exception)
+[2026-08-06 17:10:02] [KillAllActive] Called. SoloMode: True, ActiveCount: 0
+[KillProcessesByName] Target FilePath: D:\PROJECT\KeezleContainer\KeezleContainer.exe (ProcessName: KeezleContainer)
+ -> Found 0 processes for name KeezleContainer
+[KillProcessesByName] Target FilePath: D:\AnyDesk.exe (ProcessName: AnyDesk)
+ -> Found 1 processes for name AnyDesk
+ -> Skip ID: 4376 (Cannot verify file path - Access Denied)
+[KillProcessesByName] Target FilePath: D:\AnyDesk.exe (ProcessName: AnyDesk)
+ -> Found 2 processes for name AnyDesk
+ -> Skip ID: 4376 (Cannot verify file path - Access Denied)
+ -> Killed AnyDesk ID: 27656 (Path matched or default exception)
+[2026-08-06 17:10:12] [KillAllActive] Called. SoloMode: True, ActiveCount: 0
+[KillProcessesByName] Target FilePath: D:\PROJECT\KeezleContainer\KeezleContainer.exe (ProcessName: KeezleContainer)
+ -> Found 0 processes for name KeezleContainer
+[KillProcessesByName] Target FilePath: D:\AnyDesk.exe (ProcessName: AnyDesk)
+ -> Found 1 processes for name AnyDesk
+ -> Skip ID: 4376 (Cannot verify file path - Access Denied)
+[KillProcessesByName] Target FilePath: D:\AnyDesk.exe (ProcessName: AnyDesk)
+ -> Found 3 processes for name AnyDesk
+ -> Killed AnyDesk ID: 19376 (Path matched or default exception)
+ -> Skip ID: 4376 (Cannot verify file path - Access Denied)
+ -> Fail to process ID: 22036, Err: 액세스가 거부되었습니다
+[2026-08-06 17:10:16] [KillAllActive] Called. SoloMode: True, ActiveCount: 0
+[KillProcessesByName] Target FilePath: D:\PROJECT\KeezleContainer\KeezleContainer.exe (ProcessName: KeezleContainer)
+ -> Found 0 processes for name KeezleContainer
+[KillProcessesByName] Target FilePath: D:\AnyDesk.exe (ProcessName: AnyDesk)
+ -> Found 1 processes for name AnyDesk
+ -> Skip ID: 4376 (Cannot verify file path - Access Denied)
+[KillProcessesByName] Target FilePath: D:\AnyDesk.exe (ProcessName: AnyDesk)
+ -> Found 2 processes for name AnyDesk
+ -> Skip ID: 4548 (Cannot verify file path - Access Denied)
+ -> Skip ID: 4376 (Cannot verify file path - Access Denied)
+[2026-08-06 17:10:27] [KillAllActive] Called. SoloMode: True, ActiveCount: 0
+[KillProcessesByName] Target FilePath: D:\PROJECT\KeezleContainer\KeezleContainer.exe (ProcessName: KeezleContainer)
+ -> Found 0 processes for name KeezleContainer
+[KillProcessesByName] Target FilePath: D:\AnyDesk.exe (ProcessName: AnyDesk)
+ -> Found 1 processes for name AnyDesk
+ -> Skip ID: 4376 (Cannot verify file path - Access Denied)
+[2026-08-06 17:12:33] [KillAllActive] Called. SoloMode: True, ActiveCount: 0
+[KillProcessesByName] Target FilePath: D:\PROJECT\KeezleContainer\KeezleContainer.exe (ProcessName: KeezleContainer)
+ -> Found 0 processes for name KeezleContainer
+[KillProcessesByName] Target FilePath: D:\AnyDesk.exe (ProcessName: AnyDesk)
+ -> Found 2 processes for name AnyDesk
+ -> Killed AnyDesk ID: 16244 (Path matched or default exception)
+ -> Skip ID: 4376 (Cannot verify file path - Access Denied)
+[KillProcessesByName] Target FilePath: D:\AnyDesk.exe (ProcessName: AnyDesk)
+ -> Found 2 processes for name AnyDesk
+ -> Fail to process ID: 19104, Err: 액세스가 거부되었습니다
+ -> Skip ID: 4376 (Cannot verify file path - Access Denied)
+[2026-08-06 17:12:45] [KillAllActive] Called. SoloMode: True, ActiveCount: 0
+[KillProcessesByName] Target FilePath: D:\PROJECT\KeezleContainer\KeezleContainer.exe (ProcessName: KeezleContainer)
+ -> Found 0 processes for name KeezleContainer
+[KillProcessesByName] Target FilePath: D:\AnyDesk.exe (ProcessName: AnyDesk)
+ -> Found 1 processes for name AnyDesk
+ -> Skip ID: 4376 (Cannot verify file path - Access Denied)
+[2026-08-06 17:13:46] [KillAllActive] Called. SoloMode: True, ActiveCount: 0
+[KillProcessesByName] Target FilePath: D:\PROJECT\KeezleContainer\KeezleContainer.exe (ProcessName: KeezleContainer)
+ -> Found 0 processes for name KeezleContainer
+[KillProcessesByName] Target FilePath: D:\AnyDesk.exe (ProcessName: AnyDesk)
+ -> Found 2 processes for name AnyDesk
+ -> Killed AnyDesk ID: 10580 (Path matched or default exception)
+ -> Skip ID: 4376 (Cannot verify file path - Access Denied)
+[KillProcessesByName] Target FilePath: D:\AnyDesk.exe (ProcessName: AnyDesk)
+ -> Found 3 processes for name AnyDesk
+ -> Fail to process ID: 14708, Err: 액세스가 거부되었습니다
+ -> Skip ID: 4376 (Cannot verify file path - Access Denied)
+ -> Killed AnyDesk ID: 3076 (Path matched or default exception)
+[2026-08-06 17:14:04] [KillAllActive] Called. SoloMode: True, ActiveCount: 0
+[KillProcessesByName] Target FilePath: D:\PROJECT\KeezleContainer\KeezleContainer.exe (ProcessName: KeezleContainer)
+ -> Found 0 processes for name KeezleContainer
+[KillProcessesByName] Target FilePath: D:\AnyDesk.exe (ProcessName: AnyDesk)
+ -> Found 1 processes for name AnyDesk
+ -> Skip ID: 4376 (Cannot verify file path - Access Denied)
+[2026-08-06 17:14:10] [KillAllActive] Called. SoloMode: True, ActiveCount: 0
+[KillProcessesByName] Target FilePath: D:\PROJECT\KeezleContainer\KeezleContainer.exe (ProcessName: KeezleContainer)
+ -> Found 0 processes for name KeezleContainer
+[KillProcessesByName] Target FilePath: D:\AnyDesk.exe (ProcessName: AnyDesk)
+ -> Found 2 processes for name AnyDesk
+ -> Killed AnyDesk ID: 26844 (Path matched or default exception)
+ -> Skip ID: 4376 (Cannot verify file path - Access Denied)
+[2026-08-06 17:14:55] [KillAllActive] Called. SoloMode: True, ActiveCount: 0
+[KillProcessesByName] Target FilePath: D:\PROJECT\KeezleContainer\KeezleContainer.exe (ProcessName: KeezleContainer)
+ -> Found 0 processes for name KeezleContainer
+[KillProcessesByName] Target FilePath: D:\AnyDesk.exe (ProcessName: AnyDesk)
+ -> Found 1 processes for name AnyDesk
+ -> Skip ID: 4376 (Cannot verify file path - Access Denied)
+[2026-08-06 18:21:37] [KillAllActive] Called. SoloMode: True, ActiveCount: 0
+[KillProcessesByName] Target FilePath: D:\PROJECT\KeezleContainer\KeezleContainer.exe (ProcessName: KeezleContainer)
+ -> Found 0 processes for name KeezleContainer
+[KillProcessesByName] Target FilePath: D:\AnyDesk.exe (ProcessName: AnyDesk)
+ -> Found 1 processes for name AnyDesk
+ -> Skip ID: 4376 (Cannot verify file path - Access Denied)
+==================================================
+[2026-08-11 18:24:07] [NORMAL INFO] Scheduler Settings Updated & Running
+상황: 사용자 조작으로 스케줄러 정보 변경 및 기동 완료
+자동 시작 타겟 ID: 
+자동 종료 지정 시간: 18:00 (PC 종료 설정: False)
+==================================================
+
