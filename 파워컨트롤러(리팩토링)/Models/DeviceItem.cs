@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 
 namespace ShowroomPowerController
 {
@@ -18,6 +18,7 @@ namespace ShowroomPowerController
 
         public string PowerOnSequenceMode { get; set; } // PC_FIRST 또는 PROJ_FIRST
         public string RuntimeStatus { get; set; } // OFFLINE, BOOTING, ONLINE, COOLING, FREEZE
+        public string ContentState { get; set; } // 구동대기중, 콘텐츠구동중
         public int RemainingSeconds { get; set; }
         public DateTime LastActiveTime { get; set; }
         public DateTime LastShutdownTime { get; set; }
@@ -26,6 +27,7 @@ namespace ShowroomPowerController
         {
             PowerOnSequenceMode = "PC_FIRST";
             RuntimeStatus = "OFFLINE";
+            ContentState = "구동대기중";
             RemainingSeconds = 0;
             LastActiveTime = DateTime.Now;
             LastShutdownTime = DateTime.Now.AddDays(-1);

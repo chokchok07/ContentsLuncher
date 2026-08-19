@@ -132,13 +132,19 @@ namespace ShowroomLauncher
                         {
                             using (UdpClient udpClient = new UdpClient())
                             {
-                                byte[] data = Encoding.UTF8.GetBytes(string.Format("HEARTBEAT:{0}", deviceId));
+                                string runState = "IDLE";
+                                if (activeProcesses != null && activeProcesses.Count > 0)
+                                {
+                                    runState = "RUNNING";
+                                }
+
+                                byte[] data = Encoding.UTF8.GetBytes(string.Format("HEARTBEAT:{0}:{1}", deviceId, runState));
                                 udpClient.Send(data, data.Length, controllerIp, heartbeatPort);
                             }
                         }
                     }
                     catch { }
-                    System.Threading.Thread.Sleep(5000);
+                    System.Threading.Thread.Sleep(3000);
                 }
             });
         }
@@ -159,40 +165,80 @@ namespace ShowroomLauncher
                     while (isShutdownListenerRunning)
                     {
                         using (TcpClient client = shutdownListener.AcceptTcpClient())
-                        using (NetworkStream stream = client.GetStream())
                         {
-                            byte[] buffer = new byte[256];
-                            int read = stream.Read(buffer, 0, buffer.Length);
-                            if (read > 0)
+                            try
                             {
-                                string command = Encoding.UTF8.GetString(buffer, 0, read).Trim();
-                                if (command == "CONN_TEST" || command.StartsWith("CONN_TEST"))
+                                IPEndPoint remoteEP = client.Client.RemoteEndPoint as IPEndPoint;
+                                if (remoteEP != null && remoteEP.Address != null)
                                 {
-                                    byte[] resp = Encoding.UTF8.GetBytes("CONN_OK\n");
-                                    stream.Write(resp, 0, resp.Length);
-                                    stream.Flush();
-                                }
-                                else if (command == "SHUTDOWN")
-                                {
-                                    Program.LogOperation(string.Format("⚡ [네트워크 원격 제어] {0} 포트로부터 원격 종료(SHUTDOWN) 명령이 수신되었습니다. 20초 종료 카운트다운을 시작합니다.", shutdownPort));
-                                    
-                                    this.Invoke((MethodInvoker)delegate
+                                    string incomingIp = remoteEP.Address.ToString();
+                                    if (!incomingIp.Equals("127.0.0.1") && !incomingIp.Equals("::1") && !incomingIp.Equals(controllerIp))
                                     {
-                                        using (ShutdownWarningForm warnForm = new ShutdownWarningForm(isDarkMode))
+                                        controllerIp = incomingIp;
+                                        SaveSettings();
+                                        Program.LogOperation("⚡ [네트워크 원격 제어] 제어반 IP 자동 학습 갱신: " + controllerIp);
+                                    }
+                                }
+                            }
+                            catch { }
+
+                            using (NetworkStream stream = client.GetStream())
+                            {
+                                byte[] buffer = new byte[256];
+                                int read = stream.Read(buffer, 0, buffer.Length);
+                                if (read > 0)
+                                {
+                                    string command = Encoding.UTF8.GetString(buffer, 0, read).Trim();
+                                    if (command == "CONN_TEST" || command.StartsWith("CONN_TEST"))
+                                    {
+                                        byte[] resp = Encoding.UTF8.GetBytes("CONN_OK\n");
+                                        stream.Write(resp, 0, resp.Length);
+                                        stream.Flush();
+                                    }
+                                    else if (command == "RELAUNCH" || command == "KILL_ALL" || command == "RESTORE")
+                                    {
+                                        Program.LogOperation(string.Format("⚡ [네트워크 원격 제어] 원격 복구 명령({0})이 수신되었습니다. 프로세스 정돈 및 런처 화면 복원을 진행합니다.", command));
+                                        try
                                         {
-                                            if (warnForm.ShowDialog() == DialogResult.OK)
-                                            {
-                                                Program.LogOperation("⚡ [네트워크 원격 제어] 사용자가 즉시종료를 클릭했거나 카운트가 완료되어 시스템을 종료합니다.");
-                                                Process.Start("shutdown", "/s /f /t 0");
-                                                isShutdownListenerRunning = false;
-                                                Application.Exit();
-                                            }
-                                            else
-                                            {
-                                                Program.LogOperation("⚡ [네트워크 원격 제어] 사용자가 시스템 종료 취소(대피)를 클릭했습니다.");
-                                            }
+                                            byte[] resp = Encoding.UTF8.GetBytes("RELAUNCH_OK\n");
+                                            stream.Write(resp, 0, resp.Length);
+                                            stream.Flush();
                                         }
-                                    });
+                                        catch { }
+
+                                        this.Invoke((MethodInvoker)delegate
+                                        {
+                                            KillAllActive();
+                                            if (this.WindowState == FormWindowState.Minimized)
+                                            {
+                                                this.WindowState = FormWindowState.Normal;
+                                            }
+                                            this.Activate();
+                                            AutoStartContentIfNeeded();
+                                        });
+                                    }
+                                    else if (command == "SHUTDOWN")
+                                    {
+                                        Program.LogOperation(string.Format("⚡ [네트워크 원격 제어] {0} 포트로부터 원격 종료(SHUTDOWN) 명령이 수신되었습니다. 20초 종료 카운트다운을 시작합니다.", shutdownPort));
+                                        
+                                        this.Invoke((MethodInvoker)delegate
+                                        {
+                                            using (ShutdownWarningForm warnForm = new ShutdownWarningForm(isDarkMode))
+                                            {
+                                                if (warnForm.ShowDialog() == DialogResult.OK)
+                                                {
+                                                    Program.LogOperation("⚡ [네트워크 원격 제어] 사용자가 즉시종료를 클릭했거나 카운트가 완료되어 시스템을 종료합니다.");
+                                                    Process.Start("shutdown", "/s /f /t 0");
+                                                    isShutdownListenerRunning = false;
+                                                    Application.Exit();
+                                                }
+                                                else
+                                                {
+                                                    Program.LogOperation("⚡ [네트워크 원격 제어] 사용자가 시스템 종료 취소(대피)를 클릭했습니다.");
+                                                }
+                                            }
+                                        });
+                                    }
                                 }
                             }
                         }
@@ -1649,6 +1695,17 @@ namespace ShowroomLauncher
                         activeProcesses.Remove(id);
                     }
                 }
+
+                if (exitedIds.Count > 0)
+                {
+                    this.BeginInvoke((MethodInvoker)delegate {
+                        if (this.WindowState == FormWindowState.Minimized)
+                        {
+                            this.WindowState = FormWindowState.Normal;
+                            this.Activate();
+                        }
+                    });
+                }
             }
 
             foreach (ContentItem item in toLaunchMains)
@@ -2442,13 +2499,13 @@ namespace ShowroomLauncher
                         elapsedMs += intervalMs;
                     }
 
-                    if (hwnd == IntPtr.Zero) return;
+                    if (hwnd != IntPtr.Zero)
+                    {
+                        ActivateWindow(hwnd);
+                    }
 
-                    // 최초 1회 포커스 부여
-                    ActivateWindow(hwnd);
-
-                    // 포커스 유지가 켜져 있으면, 타겟 프로세스가 살아있는 동안 주기적으로 최상단 포커스 유지
-                    while (keepFocus)
+                    // 타겟 프로세스가 살아있는 동안 생사 감시 및 가동 상태 모니터링
+                    while (true)
                     {
                         if (proc != null)
                         {
@@ -2471,34 +2528,46 @@ namespace ShowroomLauncher
 
                         System.Threading.Thread.Sleep(1000);
 
-                        try
+                        if (keepFocus)
                         {
-                            IntPtr fg = GetForegroundWindow();
-                            uint fgPid = 0;
-                            if (fg != IntPtr.Zero)
+                            try
                             {
-                                GetWindowThreadProcessId(fg, ref fgPid);
-                            }
-                            uint launcherPid = (uint)Process.GetCurrentProcess().Id;
-
-                            if (fgPid == launcherPid)
-                            {
-                                // 1. 현재 조작 중인 창이 런처일 때는 포커스 유지상태를 풀어서 런처가 전면에 보이고 조작될 수 있도록 조치
-                                SetWindowPos(hwnd, HWND_NOTOPMOST, 0, 0, 0, 0, SWP_NOSIZE | SWP_NOMOVE | SWP_NOACTIVATE);
-                            }
-                            else
-                            {
-                                // 2. 그게 아닌 다른 일반 창이나 콘텐츠를 다룰 때는 항상 위에 떠 있는(HWND_TOPMOST) 포커스 유지 상태를 진행
-                                SetWindowPos(hwnd, HWND_TOPMOST, 0, 0, 0, 0, SWP_NOSIZE | SWP_NOMOVE | SWP_NOACTIVATE);
-
-                                // 포그라운드 창이 타겟 콘텐츠 창(hwnd)도 아닐 때는 포커스 강제 회수
-                                if (fg != hwnd)
+                                if (hwnd == IntPtr.Zero && !string.IsNullOrEmpty(procName))
                                 {
-                                    ActivateWindow(hwnd);
+                                    Process[] procs = Process.GetProcessesByName(procName);
+                                    if (procs.Length > 0 && procs[0].MainWindowHandle != IntPtr.Zero)
+                                    {
+                                        hwnd = procs[0].MainWindowHandle;
+                                    }
+                                }
+
+                                if (hwnd != IntPtr.Zero)
+                                {
+                                    IntPtr fg = GetForegroundWindow();
+                                    uint fgPid = 0;
+                                    if (fg != IntPtr.Zero)
+                                    {
+                                        GetWindowThreadProcessId(fg, ref fgPid);
+                                    }
+                                    uint launcherPid = (uint)Process.GetCurrentProcess().Id;
+
+                                    if (fgPid == launcherPid)
+                                    {
+                                        // 1. 현재 조작 중인 창이 런처일 때는 포커스 유지상태를 풀어서 런처가 전면에 보이고 조작될 수 있도록 조치
+                                        SetWindowPos(hwnd, HWND_NOTOPMOST, 0, 0, 0, 0, SWP_NOSIZE | SWP_NOMOVE | SWP_NOACTIVATE);
+                                    }
+                                    else
+                                    {
+                                        // 포그라운드 창이 타겟 콘텐츠 창(hwnd)도 아닐 때는 포커스 강제 회수 (상단 고정은 하지 않음)
+                                        if (fg != hwnd)
+                                        {
+                                            ActivateWindow(hwnd);
+                                        }
+                                    }
                                 }
                             }
+                            catch { }
                         }
-                        catch { }
                     }
                 }
                 catch { }

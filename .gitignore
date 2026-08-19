@@ -9,3 +9,6 @@
 # Temporary & Log files
 *.tmp
 *.log
+
+# Build Outputs
+빌드/

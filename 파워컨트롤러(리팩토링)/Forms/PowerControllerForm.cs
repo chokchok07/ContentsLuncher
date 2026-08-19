@@ -102,7 +102,7 @@ namespace ShowroomPowerController
 
         public PowerControllerForm()
         {
-            this.Text = "시연실 통합 전원 제어반 (v1.0.0)";
+            this.Text = "통합 전원 제어 (v1.0.0)";
             this.Size = new Size(1200, 950);
             this.StartPosition = FormStartPosition.CenterScreen;
             this.FormBorderStyle = FormBorderStyle.None;
@@ -155,18 +155,25 @@ namespace ShowroomPowerController
                             string message = Encoding.UTF8.GetString(data).Trim();
                             if (message.StartsWith("HEARTBEAT:"))
                             {
-                                string targetId = message.Substring(10).Trim();
+                                string[] parts = message.Split(':');
+                                string targetId = parts.Length > 1 ? parts[1].Trim() : "";
+                                string runState = parts.Length > 2 ? parts[2].Trim() : "IDLE";
                                 
                                 var dev = devices.Find(d => d.Id.Equals(targetId, StringComparison.OrdinalIgnoreCase));
                                 if (dev != null)
                                 {
                                     dev.LastActiveTime = DateTime.Now;
+                                    dev.ContentState = (runState == "RUNNING") ? "콘텐츠구동중" : "구동대기중";
                                     
-                                    bool isRecentlyShutdown = (DateTime.Now - dev.LastShutdownTime).TotalSeconds < 5;
-                                    if ((dev.RuntimeStatus == "FREEZE" || dev.RuntimeStatus == "OFFLINE") && !isRecentlyShutdown)
+                                    if (dev.RuntimeStatus == "FREEZE" || dev.RuntimeStatus == "OFFLINE")
                                     {
                                         dev.RuntimeStatus = "ONLINE";
-                                        AppendLog(string.Format("💚 [네트워크 복구] '{0}' 기기로부터 Heartbeat 정상 수신 재개 ➡️ 상태: ONLINE", dev.Name));
+                                        AppendLog(string.Format("💚 [네트워크 복구] '{0}' 기기로부터 Heartbeat 정상 수신 ➡️ 상태: ONLINE", dev.Name));
+                                        RefreshVisualDashboard();
+                                    }
+                                    else
+                                    {
+                                        // Update UI with ContentState without changing RuntimeStatus if already ONLINE
                                         RefreshVisualDashboard();
                                     }
                                 }
@@ -453,7 +460,7 @@ namespace ShowroomPowerController
 
             titleLabel = new Label();
             titleLabel.Name = "titleLabel";
-            titleLabel.Text = "⚡   시연실 통합 전원 제어반   |   [정식 운영 빌드 v1.0.0]";
+            titleLabel.Text = "⚡   통합 전원 제어   |   [정식 운영 빌드 v1.0.0]";
             titleLabel.ForeColor = ColorTranslator.FromHtml("#f54e00");
             titleLabel.Font = FontHelper.GetFont(12f, FontStyle.Bold);
             titleLabel.AutoSize = true;

@@ -16,10 +16,9 @@ namespace ShowroomPowerController
         private List<DeviceItem> linkedDevices;     
         private PowerControllerForm mainForm;
 
+        private static Random rnd = new Random();
+        private int animPhaseOffset;
         private System.Windows.Forms.Timer animTimer;
-        private int pulseAlpha = 150;
-        private bool pulseIncreasing = true;
-        private bool blinkState = false;
         private int animTickCount = 0;
 
         private Button btnOn;                       
@@ -36,6 +35,7 @@ namespace ShowroomPowerController
             this.mainForm = form;
             this.DoubleBuffered = true;
             this.BackColor = Color.Transparent;
+            this.animPhaseOffset = rnd.Next(0, 20);
 
             this.Size = new Size(225, 215);
 
@@ -95,30 +95,25 @@ namespace ShowroomPowerController
         {
             animTickCount++;
 
-            if (device.RuntimeStatus == "ONLINE")
-            {
-                if (pulseIncreasing)
-                {
-                    pulseAlpha += 12;
-                    if (pulseAlpha >= 255) { pulseAlpha = 255; pulseIncreasing = false; }
-                }
-                else
-                {
-                    pulseAlpha -= 12;
-                    if (pulseAlpha <= 80) { pulseAlpha = 80; pulseIncreasing = true; }
-                }
-            }
-
-            if (device.RuntimeStatus == "FREEZE")
-            {
-                if (animTickCount % 5 == 0)
-                {
-                    blinkState = !blinkState;
-                }
-            }
-
             UpdateButtonStates();
-            this.Invalidate();
+
+            bool needsRedraw = (device.RuntimeStatus == "ONLINE" || device.RuntimeStatus == "FREEZE" || device.RuntimeStatus == "BOOTING" || device.RuntimeStatus == "COOLING");
+            if (!needsRedraw)
+            {
+                foreach (var sub in linkedDevices)
+                {
+                    if (sub.RuntimeStatus == "BOOTING" || sub.RuntimeStatus == "COOLING" || sub.RuntimeStatus == "ONLINE" || sub.RuntimeStatus == "FREEZE")
+                    {
+                        needsRedraw = true;
+                        break;
+                    }
+                }
+            }
+
+            if (needsRedraw)
+            {
+                this.Invalidate();
+            }
         }
 
         private void UpdateButtonStates()
@@ -191,7 +186,19 @@ namespace ShowroomPowerController
             if (device.RuntimeStatus == "ONLINE")
             {
                 cardBg = ThemeManager.CardBgColor;
-                borderColor = Color.FromArgb(pulseAlpha, ColorTranslator.FromHtml("#1f8a65"));
+                
+                if (device.ContentState == "콘텐츠구동중")
+                {
+                    borderColor = Color.FromArgb(255, ColorTranslator.FromHtml("#1f8a65"));
+                }
+                else
+                {
+                    double angle = ((animTickCount + animPhaseOffset) % 20) / 20.0 * 2.0 * Math.PI;
+                    int pulseAlpha = (int)(160 + 95 * Math.Sin(angle));
+                    if (pulseAlpha < 80) pulseAlpha = 80;
+                    if (pulseAlpha > 255) pulseAlpha = 255;
+                    borderColor = Color.FromArgb(pulseAlpha, ColorTranslator.FromHtml("#1f8a65"));
+                }
                 borderWidth = 2.0f;
             }
             else if (device.RuntimeStatus == "OFFLINE")
@@ -203,7 +210,8 @@ namespace ShowroomPowerController
             else if (device.RuntimeStatus == "FREEZE")
             {
                 cardBg = ThemeManager.CardBgColor;
-                borderColor = blinkState ? ColorTranslator.FromHtml("#cf2d56") : Color.FromArgb(60, 20, 25);
+                bool blinkState = ((animTickCount + animPhaseOffset) / 5) % 2 == 0;
+                borderColor = blinkState ? ColorTranslator.FromHtml("#cf2d56") : Color.FromArgb(70, 20, 25);
                 borderWidth = 2.5f;
             }
             else if (device.RuntimeStatus == "BOOTING")
@@ -346,12 +354,27 @@ namespace ShowroomPowerController
             Font infoFont = FontHelper.GetFont(8f, FontStyle.Regular);
             Brush textBrush = dev.RuntimeStatus == "OFFLINE" ? new SolidBrush(ThemeManager.MutedTextColor) : new SolidBrush(ThemeManager.TextColor);
 
-            RectangleF nameRect = new RectangleF(xOffset + 78, 18, 110, 18);
+            RectangleF nameRect = new RectangleF(xOffset + 78, 16, 110, 18);
             StringFormat sfName = new StringFormat() { Trimming = StringTrimming.EllipsisCharacter, FormatFlags = StringFormatFlags.NoWrap };
             g.DrawString(dev.Name, nameFont, textBrush, nameRect, sfName);
 
-            g.DrawString("IP: " + dev.IpAddress, infoFont, new SolidBrush(ThemeManager.MutedTextColor), new PointF(xOffset + 78, 38));
-            g.DrawString(string.Format("[{0}]", dev.Type), infoFont, new SolidBrush(currentBorderColor), new PointF(xOffset + 78, 54));
+            g.DrawString("IP: " + dev.IpAddress, infoFont, new SolidBrush(ThemeManager.MutedTextColor), new PointF(xOffset + 78, 35));
+
+            string modeTag = "";
+            if (dev.Type == "PC")
+            {
+                if (dev.PowerOnSequenceMode == "PROJ_FIRST") modeTag = " (프로젝터 우선)";
+                else if (dev.PowerOnSequenceMode == "SIMULTANEOUS") modeTag = " (동시 가동)";
+                else modeTag = " (PC 우선)";
+            }
+
+            string spaceTypeStr = dev.Type == "PC" ? "PC" : "프로젝터";
+            string spaceTag = string.IsNullOrEmpty(dev.Space) 
+                ? string.Format("[{0}]{1}", spaceTypeStr, modeTag) 
+                : string.Format("📍 {0} · {1}{2}", dev.Space, spaceTypeStr, modeTag);
+
+            RectangleF tagRect = new RectangleF(xOffset + 78, 51, 145, 16);
+            g.DrawString(spaceTag, infoFont, new SolidBrush(ThemeManager.MutedTextColor), tagRect, sfName);
 
             if (dev.RuntimeStatus == "BOOTING" || dev.RuntimeStatus == "COOLING")
             {
@@ -384,7 +407,7 @@ namespace ShowroomPowerController
 
             if (dev.RuntimeStatus == "ONLINE")
             {
-                statusStr = "ONLINE (실행 중)";
+                statusStr = string.IsNullOrEmpty(dev.ContentState) ? "ONLINE (실행 중)" : dev.ContentState;
                 statusColor = Color.FromArgb(16, 185, 129);
             }
             else if (dev.RuntimeStatus == "BOOTING")

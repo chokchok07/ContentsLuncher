@@ -22,7 +22,7 @@ namespace ShowroomLauncher
         private bool isModuleEnabled = false;
         private Button btnKeepFocusOn;
         private Button btnKeepFocusOff;
-        private bool isKeepFocusEnabled = false;
+        private bool isKeepFocusEnabled = true;
         private Button btnSave;
         private Button btnCancel;
 
