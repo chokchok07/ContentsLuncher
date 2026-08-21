@@ -16,8 +16,8 @@ if not exist "%CSC_PATH%" (
     exit /b 1
 )
 
-echo [RUN] "%CSC_PATH%" /target:winexe /out:PowerController.exe /r:System.Web.Extensions.dll Program.cs ThemeManager.cs Forms\*.cs Models\*.cs Controls\*.cs /resource:PretendardVariable.ttf
-"%CSC_PATH%" /target:winexe /out:PowerController.exe /r:System.Web.Extensions.dll Program.cs ThemeManager.cs Forms\*.cs Models\*.cs Controls\*.cs /resource:PretendardVariable.ttf
+echo [RUN] "%CSC_PATH%" /target:winexe /out:PowerController.exe /r:System.Web.Extensions.dll /win32icon:icon.ico Program.cs ThemeManager.cs Forms\*.cs Models\*.cs Controls\*.cs /resource:PretendardVariable.ttf
+"%CSC_PATH%" /target:winexe /out:PowerController.exe /r:System.Web.Extensions.dll /win32icon:icon.ico Program.cs ThemeManager.cs Forms\*.cs Models\*.cs Controls\*.cs /resource:PretendardVariable.ttf
 
 if %errorlevel% neq 0 (
     echo [ERROR] Compilation failed.
