@@ -809,7 +809,7 @@ namespace ShowroomLauncher
             footerPanel.Controls.Add(chkAutostart);
 
             Label lblVersion = new Label();
-            lblVersion.Text = "v1.2.0 (Dual Theme Edition)";
+            lblVersion.Text = string.Format("v{0} (Dual Theme Edition)", Application.ProductVersion);
             lblVersion.ForeColor = Color.FromArgb(107, 114, 128);
             lblVersion.Font = new Font("Consolas", 9f);
             lblVersion.AutoSize = true;

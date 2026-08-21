@@ -102,7 +102,7 @@ namespace ShowroomPowerController
 
         public PowerControllerForm()
         {
-            this.Text = "통합 전원 제어 (v1.0.0)";
+            this.Text = string.Format("통합 전원 제어 (v{0})", Application.ProductVersion);
             this.Size = new Size(1200, 950);
             this.StartPosition = FormStartPosition.CenterScreen;
             this.FormBorderStyle = FormBorderStyle.None;
@@ -460,7 +460,7 @@ namespace ShowroomPowerController
 
             titleLabel = new Label();
             titleLabel.Name = "titleLabel";
-            titleLabel.Text = "⚡   통합 전원 제어   |   [정식 운영 빌드 v1.0.0]";
+            titleLabel.Text = string.Format("⚡   통합 전원 제어   |   [정식 운영 빌드 v{0}]", Application.ProductVersion);
             titleLabel.ForeColor = ColorTranslator.FromHtml("#f54e00");
             titleLabel.Font = FontHelper.GetFont(12f, FontStyle.Bold);
             titleLabel.AutoSize = true;
